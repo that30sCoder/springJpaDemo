@@ -10,20 +10,18 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 @SpringBootTest
 class SpringJpaDemoApplicationTests {
 
-	@Autowired
-	BookRepository bookRepository;
+    @Autowired
+    BookRepository bookRepository;
 
+    @Test
+    void testBookRepository() {
+        long count = bookRepository.count();
 
-	@Test
-	void testBookRepository(){
-		long count = bookRepository.count();
+        assertThat(count).isGreaterThan(0);
+    }
 
-		assertThat(count).isGreaterThan(0);
-	}
-	@Test
-	void contextLoads() {
-	}
-
-
+    @Test
+    void contextLoads() {
+    }
 
 }

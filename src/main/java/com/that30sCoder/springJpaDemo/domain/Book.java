@@ -1,20 +1,51 @@
-package com.that30sCoder.springJpaDemo.model;
-
+package com.that30sCoder.springJpaDemo.domain;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-
 import java.util.Objects;
 
+/**
+ * Created by jt on 6/12/21.
+ */
 @Entity
-
 public class Book {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    private String title;
+    private String isbn;
+    private String publisher;
+    private Long authorId;
+
+    public Book() {
+
+    }
+
+    public Book(String title, String isbn, String publisher, Long authorId) {
+        this.title = title;
+        this.isbn = isbn;
+        this.publisher = publisher;
+        this.authorId = authorId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Book book = (Book) o;
+
+        return Objects.equals(id, book.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
+    }
 
     public Long getId() {
         return id;
@@ -23,31 +54,6 @@ public class Book {
     public void setId(Long id) {
         this.id = id;
     }
-
-    public Book() {
-
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Book book = (Book) o;
-        return Objects.equals(id, book.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
-
-    public Book(String title, String isbn, String publisher) {
-        this.title = title;
-        this.isbn = isbn;
-        this.publisher = publisher;
-    }
-
-    private String title;
 
     public String getTitle() {
         return title;
@@ -73,6 +79,11 @@ public class Book {
         this.publisher = publisher;
     }
 
-    private String isbn;
-    private String publisher;
+    public Long getAuthorId() {
+        return authorId;
+    }
+
+    public void setAuthorId(Long authorId) {
+        this.authorId = authorId;
+    }
 }
